@@ -1,0 +1,36 @@
+#:kivy 1.10.0
+
+RootWidget:
+    # import container
+    container: container
+
+    StackLayout:
+        orientation: 'tb-lr'
+        padding: 20
+        spacing: 20
+
+        ToggleButton:
+            text: "Inventor"
+            size_hint: .15, .50
+
+            on_release: app.screen_select('inventor')
+
+            group: 'mode'
+
+        ToggleButton:
+            text: "Developer"
+            size_hint: .15, .50
+
+            on_release: app.screen_select('developer')
+
+            group: 'mode'
+
+        BoxLayout:
+            size_hint: .85, .85
+            pos: .25, 20
+
+            id: container
+
+            Label:
+                font_size: 48
+                text: "Welcome to Inventify!\nPlease select a mode \nat the left to get started.\n(This is a placeholder page)"
