@@ -29,21 +29,29 @@ class SearchInventionsGridLayout(GridLayout):
     def search(self, searchText):
         '''Allows the user to search for inventions.'''
 
-        result = DBAccess.searchQuery(searchText)
+        result = DBAccess.searchQuery(self, searchText)
         print(result["name"])
 
+
+    
+        # for child in reversed(self.ids.button_grid.children):
+        #     if isinstance(child, Button) and child.text == :
+
+        button = Button(text=result["name"])
+        self.ids.button_grid.add_widget(button)
+
         # Iterate across the children "buttons" and populate them with information obtained.
-        for child in reversed(self.ids.button_grid.children):
-            if isinstance(child, Button):
-                child.text = result["name"]
-                child.disabled = not child.disabled
-                child.opacity = 0 if (child.opacity == 1) else 1
-                # if child.disabled:
-                #     child.opacity = 0
-                # else:
-                #     child.opacity = 1
-                #     print(child.text)
-                # child.opacity = 0 if child.disabled else 1
+        # for child in reversed(self.ids.button_grid.children):
+        #     if isinstance(child, Button):
+        #         child.text = result["name"]
+        #         child.disabled = not child.disabled
+        #         child.opacity = 0 if (child.opacity == 1) else 1
+        #         # if child.disabled:
+        #         #     child.opacity = 0
+        #         # else:
+        #         #     child.opacity = 1
+        #         #     print(child.text)
+        #         # child.opacity = 0 if child.disabled else 1
 
 
 
@@ -98,7 +106,6 @@ class DBAccess():
         '''Queries the database for inventions.
         :return: dictionary object of invention
         '''
-        
         simulatedJSON = '{ "name":"Test Invention 1", "NDA":0, "description":"This is a description of the test invention. No NDA."}'
         return json.loads(simulatedJSON)
 
