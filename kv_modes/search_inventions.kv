@@ -27,6 +27,7 @@ SearchInventionsGridLayout:
             font_size: 32
             multiline: False
             size_hint: .85, 1.0
+            on_text_validate: searchInventions.search(entry.text) # when the user presses enter
         Button:
             text: "Search"
             size_hint: .15, 1.0
