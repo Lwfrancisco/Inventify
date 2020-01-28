@@ -16,43 +16,20 @@ import json
 kivy.require('1.10.0')
 
 class SearchInventionsGridLayout(GridLayout):
+    '''Kivy layout for the search inventions page'''
 
-    # def __init__(self, **kwargs):
-    #     super().__init__(**kwargs)
-
-    #     for child in reversed(self.ids.button_grid.children):
-    #         if isinstance(child, Button):
-    #             child.disabled = True
-    #             child.opacity = 0
+    displayed_inventions = [""] # no displayed inventions to start
 
     # Function called when search is pressed
     def search(self, searchText):
         '''Allows the user to search for inventions.'''
 
-        result = DBAccess.searchQuery(self, searchText)
-        print(result["name"])
+        search_result = DBAccess.searchQuery(self, searchText)
 
-
-    
-        # for child in reversed(self.ids.button_grid.children):
-        #     if isinstance(child, Button) and child.text == :
-
-        button = Button(text=result["name"])
-        self.ids.button_grid.add_widget(button)
-
-        # Iterate across the children "buttons" and populate them with information obtained.
-        # for child in reversed(self.ids.button_grid.children):
-        #     if isinstance(child, Button):
-        #         child.text = result["name"]
-        #         child.disabled = not child.disabled
-        #         child.opacity = 0 if (child.opacity == 1) else 1
-        #         # if child.disabled:
-        #         #     child.opacity = 0
-        #         # else:
-        #         #     child.opacity = 1
-        #         #     print(child.text)
-        #         # child.opacity = 0 if child.disabled else 1
-
+        if search_result["name"] not in self.displayed_inventions:
+            button = Button(text=search_result["name"])
+            self.ids.button_grid.add_widget(button)
+            self.displayed_inventions.append(search_result["name"])
 
 
     def populate(self):
