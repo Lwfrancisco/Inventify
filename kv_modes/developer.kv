@@ -1,0 +1,26 @@
+#:kivy 1.10.0
+
+
+# Define id so I can refer to the GridLayout
+# class functions
+# Display points to the entry widget
+# Rows automatically places the BoxLayout's evenly within the 5 rows.
+DeveloperHomeGridLayout:
+    id: developerHome
+    rows: 6
+    padding: 20
+    spacing: 20
+
+    font_size: 32
+
+    Label:
+        font_size: 36
+        text: "Developer Home"
+
+    StackLayout:
+        spacing: 10
+        Button:
+            text: "Search Inventions"
+            on_release: app.screen_select('search_inventions')
+        Button:
+            text: "Evaluate Inventions"
