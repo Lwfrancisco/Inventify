@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 
-# ---------- main.py  ----------
+'''
+ ---------- main.py  ----------
+ The primary running process of Inventify.
+'''
+
+__version__ = "0.1.0"
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -28,12 +33,15 @@ class SearchInventionsGridLayout(GridLayout):
 
         if search_result["name"] not in self.displayed_inventions:
             button = Button(text=search_result["name"])
+            #button.bind(on_release=app.screen_select('view_invention'))
             self.ids.button_grid.add_widget(button)
             self.displayed_inventions.append(search_result["name"])
 
-
     def populate(self):
         '''Populates the list of inventions'''
+
+class ViewInventionGridLayout(GridLayout):
+    '''Kivy layout for the invention viewing page'''
 
 class DeveloperHomeGridLayout(GridLayout):
     '''Contains class members accessible to the kv file'''
@@ -41,13 +49,24 @@ class DeveloperHomeGridLayout(GridLayout):
 class InventorHomeGridLayout(GridLayout):
     '''Contains class members accessible to the kv file'''
 
+class DBAccess():
+    '''Database Access for interacting with the Inventify database.'''
+
+    def searchQuery(self, search):
+        '''Queries the database for inventions.
+        :return: dictionary object of invention
+        '''
+
+        # temporary solution
+        simulatedJSON = '{ "name":"Test Invention 1", "NDA":0, "description":"This is a description of the test invention. No NDA."}'
+        return json.loads(simulatedJSON)
+
 class RootWidget(BoxLayout):
     '''Create a controller that receives a custom widget from the kv lang file.
     Add an action to be called from a kv file.
     '''
 
     container = ObjectProperty(None)
-
 
 class InventifyApp(App):
     '''This is the main running process within the app.'''
@@ -75,16 +94,6 @@ class InventifyApp(App):
         selector = Builder.load_file('kv_modes/' + filename)
         # add content of the .kv file to the container
         self.root.container.add_widget(selector)
-
-class DBAccess():
-    '''Database Access layer for interacting with the Inventify database.'''
-
-    def searchQuery(self, search):
-        '''Queries the database for inventions.
-        :return: dictionary object of invention
-        '''
-        simulatedJSON = '{ "name":"Test Invention 1", "NDA":0, "description":"This is a description of the test invention. No NDA."}'
-        return json.loads(simulatedJSON)
 
 
 if __name__ == '__main__':
