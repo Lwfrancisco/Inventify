@@ -20,6 +20,10 @@ import json
 
 kivy.require('1.10.0')
 
+from kivy.config import Config
+Config.set('graphics', 'width', '360')
+Config.set('graphics', 'height', '640')
+
 class SearchInventionsGridLayout(GridLayout):
     '''Kivy layout for the search inventions page'''
 
