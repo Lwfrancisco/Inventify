@@ -20,9 +20,13 @@ import json
 
 kivy.require('1.10.0')
 
+# Set window size (360x640 for the demo device)
 from kivy.config import Config
 Config.set('graphics', 'width', '360')
 Config.set('graphics', 'height', '640')
+
+# Prevent kivy's automatic application exit on back button
+Config.set('kivy', 'exit_on_escape', '0')
 
 class SearchInventionsGridLayout(GridLayout):
     '''Kivy layout for the search inventions page'''

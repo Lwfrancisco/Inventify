@@ -7,11 +7,32 @@
 InventorHomeGridLayout:
     id: inventorHome
     rows: 6
-    padding: 20
-    spacing: 20
+    # padding: 50
+    # spacing: 40
 
     font_size: 32
 
-    Label:
-        font_size: 36
-        text: "Inventor Home"
+    StackLayout:
+        spacing: 50
+        size_hint_y: None
+        Label:
+            # text_size: root.width, root.height
+            # size: self.size
+            size: self.texture_size
+            font_size: 72
+            valign: 'middle'
+            halign: 'center'
+            text: "Inventor Home"
+        Button:
+            text: "Post Inventions"
+            size_hint_y: 2.0
+            on_release: app.screen_select('post_inventions')
+        Button:
+            text: "NDA"
+            size_hint_y: 2.0
+        Button:
+            text: "Start Patent Help"
+            size_hint_y: 2.0
+        Button:
+            text: "Create Inventor Profile"
+            size_hint_y: 2.0
