@@ -7,7 +7,8 @@
 # Rows automatically places the BoxLayout's evenly within the 5 rows.
 PostInventionGridLayout:
     id: postInvention
-    display: entry
+    display: inv_name
+    # display: inv_desc
     rows: 15
     padding: 20
     spacing: 20
@@ -16,22 +17,34 @@ PostInventionGridLayout:
 
     Label:
         font_size: 36
-        text: "Search For Inventions"
+        text: "Post Invention"
 
-    BoxLayout:
+    StackLayout:
         spacing: 10
 
         # Where input is displayed
         TextInput:
-            id: entry
+            id: inv_name
             font_size: 32
             multiline: False
-            size_hint: .85, 1.0
-            on_text_validate: searchInventions.search(entry.text) # when the user presses enter
+            size_hint_y: .3
+            text: "Invention Name"
+        TextInput:
+            id: inv_desc
+            font_size: 32
+            multiline: True
+            text: "Invention Description"
+        BoxLayout:
+            Label:
+                text: "Include Default NDA?"
+            CheckBox:
+                id: nda_checkbox
         Button:
-            text: "Search"
-            size_hint: .15, 1.0
-            on_press: searchInventions.search(entry.text)
+            text: "Post"
+            size_hint_x: .25
+            size_hint_y: .3
+            on_press: postInvention.post(inv_name.text, inv_desc.text, nda_checkbox.state)
+            on_release: app.go_back()
 
     StackLayout:
         id: button_grid

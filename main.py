@@ -35,17 +35,16 @@ Config.set('kivy', 'exit_on_escape', '0')
 class PostInventionGridLayout(GridLayout):
     '''Kivy layout for the invention posting page'''
 
-    # def post_invention(self, name, nda, desc, user):
-    #     post = inv.invention(name, nda, desc, user)
+    def post(self, name, desc, nda, user="test_user"):
+        if nda == "down":
+            nda = True
+        else:
+            nda = False
+        post = inv.invention(name, nda, desc, user)
+        database.insertInvention(post)
 
 class SearchInventionsGridLayout(GridLayout):
     '''Kivy layout for the search inventions page'''
-
-    # button_grid = ObjectProperty(None)
-
-    # def __init__(self, **kwargs):
-    #     super(SearchInventionsGridLayout, self).__init__(**kwargs)
-    #     self.button_grid.bind(minimum_height=self.button_grid.setter('height'))
 
     # Function called when search is pressed
     def search(self, searchText):
@@ -130,18 +129,27 @@ class InventifyApp(App):
 
     def hook_keyboard(self, window, key, *largs):
         if key == 27:
+            self.go_back()
+            return True
+
+    def go_back(self):
             self.screen_stack.pop() # pop current screen
 
-            if not self.screen_stack:           # if list is empty, go to root
+            if not self.screen_stack:           # if list is empty, exit application
                 self.screen_select('')
             else:                               # else, go to last screen
                 self.screen_select(self.screen_stack.pop())
-            return True
 
 
 if __name__ == '__main__':
     '''Start the application'''
 
     database = db.DBAccess()
+
+    # Check if json file exists. If it does
+    if len(database.searchQuery('test')) < 5:
+        for i in range(0, 5):
+            invention = inv.invention("Test " + str(i), i%2 == 0, "Description of invention...", "test_user")
+            database.insertInvention(invention)
 
     InventifyApp().run()

@@ -15,31 +15,35 @@ SearchInventionsGridLayout:
 
     font_size: 32
 
-    Label:
-        font_size: 36
-        text: "Search For Inventions"
+    StackLayout:
+        spacing: 20
+        Label:
+            font_size: 36
+            size_hint_y: .2
+            text: "Search For Inventions"
 
-    BoxLayout:
-        spacing: 10
-
-        # Where input is displayed
-        TextInput:
-            id: entry
-            font_size: 32
-            multiline: False
-            size_hint: .85, 1.0
-            on_text_validate: searchInventions.search(entry.text) # when the user presses enter
-        Button:
-            text: "Search"
-            size_hint: .15, 1.0
-            on_press: searchInventions.search(entry.text)
-
-    ScrollView:
-        size: self.size
-        GridLayout:
-            id: button_grid
-            size_hint_y: None
-            cols: 1
-            row_default_height: '60'
-            row_force_default: True
+        BoxLayout:
             spacing: 10
+            size_hint_y: .2
+
+            # Where input is displayed
+            TextInput:
+                id: entry
+                font_size: 32
+                multiline: False
+                size_hint: .85, 1.0
+                on_text_validate: searchInventions.search(entry.text) # when the user presses enter
+            Button:
+                text: "Search"
+                size_hint: .15, 1.0
+                on_press: searchInventions.search(entry.text)
+
+        ScrollView:
+            size: self.size
+            GridLayout:
+                id: button_grid
+                size_hint_y: None
+                cols: 1
+                row_default_height: '60'
+                row_force_default: True
+                spacing: 10
