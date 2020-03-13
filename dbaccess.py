@@ -29,12 +29,20 @@ class DBAccess():
     # Search database with search query
     def searchQuery(self, search):
         '''Queries the database for inventions.
-        :return: dictionary object of invention
+        :return: list of inventions (dictionary objects)
         '''
+        
+        with open(self.filename) as json_file:
+            data = json.load(json_file)
+            temp = data['inventions']
 
-        # temporary solution
-        simulatedJSON = '{ "name":"Test Invention 1", "NDA":0, "description":"This is a description of the test invention. No NDA."}'
-        return json.loads(simulatedJSON)
+        # Inefficient as heck. Fix later.
+        name_search = list(filter(lambda element: element['name'].find(search) != -1, temp))
+        desc_search = list(filter(lambda element: element['description'].find(search) != -1, temp))
+        id_search = list(filter(lambda element: str(element['id']).find(search) != -1, temp))
+        results = list(name_search + desc_search + id_search)
+        results = {frozenset(item.items()) : item for item in results}.values()
+        return results
 
     # Insert invention into database
     def insertInvention(self, invention):
@@ -55,3 +63,9 @@ class DBAccess():
             temp.append(invention) # add invention to inventions list.
             json.dump(data, json_outfile, indent=4)
             json_outfile.close()
+
+# inv1 = inv.invention("test", False, "Description for test", "test_user")
+# obj1 = DBAccess()
+# # obj1.insertInvention(inv1)
+# results = obj1.searchQuery('blah')
+# print(results)

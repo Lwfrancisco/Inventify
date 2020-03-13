@@ -20,6 +20,7 @@ from kivy.base import EventLoop # For back button event capture
 import kivy
 
 import dbaccess as db
+import invention as inv
 
 kivy.require('1.10.0')
 
@@ -34,24 +35,32 @@ Config.set('kivy', 'exit_on_escape', '0')
 class PostInventionGridLayout(GridLayout):
     '''Kivy layout for the invention posting page'''
 
-    def post_invention(self, name, nda, desc)
+    def post_invention(self, name, nda, desc, user):
+        post = inv.invention(name, nda, desc, user)
 
 class SearchInventionsGridLayout(GridLayout):
     '''Kivy layout for the search inventions page'''
-
-    displayed_inventions = [""] # no displayed inventions to start
 
     # Function called when search is pressed
     def search(self, searchText):
         '''Allows the user to search for inventions.'''
 
-        search_result = db.DBAccess.searchQuery(self, searchText)
+        self.ids.button_grid.clear_widgets()
+        displayed_inventions = [] # no displayed inventions to start
 
-        if search_result["name"] not in self.displayed_inventions:
-            button = Button(text=search_result["name"])
-            #button.bind(on_release=app.screen_select('view_invention'))
-            self.ids.button_grid.add_widget(button)
-            self.displayed_inventions.append(search_result["name"])
+        search_results = list(database.searchQuery(searchText))
+
+        # print(type(search_results[0]['id']))
+
+        for i in search_results:
+            if i['id'] not in displayed_inventions:
+                button_text = "id: " + str(i['id']) + " Name: " + str(i['name'])
+                button = Button(text=button_text)
+                self.ids.button_grid.add_widget(button)
+                # button.bind(on_release=app.screen_select('view_invention'))
+                displayed_inventions.append(i['id'])
+
+        
 
     def populate(self):
         '''Populates the list of inventions'''
@@ -126,5 +135,7 @@ class InventifyApp(App):
 
 if __name__ == '__main__':
     '''Start the application'''
+
+    database = db.DBAccess()
 
     InventifyApp().run()
