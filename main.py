@@ -17,6 +17,7 @@ from kivy.uix.button import Button
 from kivy.core.window import Window # For back button screen selecting
 from kivy.base import EventLoop # For back button event capture
 
+
 import kivy
 
 import dbaccess as db
@@ -60,18 +61,41 @@ class SearchInventionsGridLayout(GridLayout):
         for i in search_results:
             if i['id'] not in displayed_inventions:
                 button_text = "id: " + str(i['id']) + " Name: " + str(i['name'])
-                button = Button(text=button_text)
+                button = Button(text=button_text, id=str(i['id']))
                 self.ids.button_grid.add_widget(button)
-                # button.bind(on_release=app.screen_select('view_invention'))
+                button.bind(on_release=self.populate)
                 displayed_inventions.append(i['id'])
 
-        
-
-    def populate(self):
+    def populate(self, instance):
         '''Populates the list of inventions'''
+
+        root.inv_id = int(instance.id)
+        root.screen_select('view_invention')
+
+    def get_id(self,  instance):
+        for id, widget in instance.parent.ids.items():
+            if widget.__self__ == instance:
+                return id
 
 class ViewInventionGridLayout(GridLayout):
     '''Kivy layout for the invention viewing page'''
+
+    name = ''
+    description = ''
+    identifier = ''
+
+    def populate(self):
+        print(root.inv_id)
+        invention = database.id_query(root.inv_id)[0]
+        print(invention)
+
+        self.name = invention['name']
+        self.description = invention['description']
+        self.identifier = str(invention['id'])
+
+        self.ids['name'].text = self.name
+        self.ids['description'].text = "Description: \n" + self.description
+        self.ids['identifier'].text = "ID: " + self.identifier
 
 class DeveloperHomeGridLayout(GridLayout):
     '''Contains class members accessible to the kv file'''
@@ -152,4 +176,10 @@ if __name__ == '__main__':
             invention = inv.invention("Test " + str(i), i%2 == 0, "Description of invention...", "test_user")
             database.insertInvention(invention)
 
-    InventifyApp().run()
+    
+    # Temporary to figure out proper parameters passing between screens.
+    inv_id = 0
+
+    root = InventifyApp()
+
+    root.run()

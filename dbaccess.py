@@ -52,6 +52,21 @@ class DBAccess():
         results = {frozenset(item.items()) : item for item in results}.values()
         return results
 
+    def id_query(self, id):
+        '''Queries the database for invention using id.
+        :return: invention (dictionary object)
+        '''
+
+        with open(self.filename) as json_file:
+            data = json.load(json_file)
+            temp = data['inventions']
+
+        id_result = list(filter(lambda element: element['id'] == id, temp))
+
+        return id_result
+
+
+
     # Insert invention into database
     def insertInvention(self, invention):
         '''Inserts invention into database.'''

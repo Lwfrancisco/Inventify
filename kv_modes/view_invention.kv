@@ -5,7 +5,7 @@
 # class functions
 # Display points to the entry widget
 ViewInventionGridLayout:
-    id: searchInventions
+    id: viewInvention
     rows: 15
     padding: 20
     spacing: 20
@@ -13,20 +13,18 @@ ViewInventionGridLayout:
     font_size: 32
 
     Label:
-        id: title_label
         font_size: 36
-
-    BoxLayout:
-        spacing: 10
-
-        # Toggle Button for NDA
-        # ToggleButton:
-        #     text
-
-        Button:
-            text: "View NDA"
-            size_hint: .15, 1.0
+        id: name
+        
+    Button:
+        id: nda_button
+        text: "Accept NDA"
+        size_hint: .15, .75
+        on_press: viewInvention.populate()
 
     StackLayout:
-        id: info_stack
         spacing: 10
+        Label:
+            id: identifier
+        Label:
+            id: description

@@ -36,7 +36,7 @@ SearchInventionsGridLayout:
             Button:
                 text: "Search"
                 size_hint: .15, 1.0
-                on_press: searchInventions.search(entry.text)
+                on_release: searchInventions.search(entry.text)
 
         ScrollView:
             size: self.size
