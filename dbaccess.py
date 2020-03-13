@@ -45,8 +45,8 @@ class DBAccess():
             temp = data['inventions']
 
         # Inefficient as heck. Fix later.
-        name_search = list(filter(lambda element: element['name'].find(search) != -1, temp))
-        desc_search = list(filter(lambda element: element['description'].find(search) != -1, temp))
+        name_search = list(filter(lambda element: element['name'].lower().find(search.lower()) != -1, temp))
+        desc_search = list(filter(lambda element: element['description'].lower().find(search.lower()) != -1, temp))
         id_search = list(filter(lambda element: str(element['id']).find(search) != -1, temp))
         results = list(name_search + desc_search + id_search)
         results = {frozenset(item.items()) : item for item in results}.values()
@@ -72,8 +72,9 @@ class DBAccess():
             json.dump(data, json_outfile, indent=4)
             json_outfile.close()
 
+
 # inv1 = inv.invention("test", False, "Description for test", "test_user")
 # obj1 = DBAccess()
-# # obj1.insertInvention(inv1)
+# obj1.insertInvention(inv1)
 # results = obj1.searchQuery('blah')
 # print(results)
