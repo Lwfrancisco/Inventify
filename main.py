@@ -18,7 +18,8 @@ from kivy.core.window import Window # For back button screen selecting
 from kivy.base import EventLoop # For back button event capture
 
 import kivy
-import json
+
+import dbaccess as db
 
 kivy.require('1.10.0')
 
@@ -33,6 +34,8 @@ Config.set('kivy', 'exit_on_escape', '0')
 class PostInventionGridLayout(GridLayout):
     '''Kivy layout for the invention posting page'''
 
+    def post_invention(self, name, nda, desc)
+
 class SearchInventionsGridLayout(GridLayout):
     '''Kivy layout for the search inventions page'''
 
@@ -42,7 +45,7 @@ class SearchInventionsGridLayout(GridLayout):
     def search(self, searchText):
         '''Allows the user to search for inventions.'''
 
-        search_result = DBAccess.searchQuery(self, searchText)
+        search_result = db.DBAccess.searchQuery(self, searchText)
 
         if search_result["name"] not in self.displayed_inventions:
             button = Button(text=search_result["name"])
@@ -64,18 +67,6 @@ class InventorHomeGridLayout(GridLayout):
 
 class EmptyLayout(GridLayout):
     '''Contains class members accessible to the kv file'''
-
-class DBAccess():
-    '''Database Access for interacting with the Inventify database.'''
-
-    def searchQuery(self, search):
-        '''Queries the database for inventions.
-        :return: dictionary object of invention
-        '''
-
-        # temporary solution
-        simulatedJSON = '{ "name":"Test Invention 1", "NDA":0, "description":"This is a description of the test invention. No NDA."}'
-        return json.loads(simulatedJSON)
 
 class RootWidget(BoxLayout):
     '''Create a controller that receives a custom widget from the kv lang file.
