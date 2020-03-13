@@ -88,12 +88,17 @@ class RootWidget(BoxLayout):
 class InventifyApp(App):
     '''This is the main running process within the app.'''
 
+    screen_stack = []
+
     def build(self):
         '''This method loads the root.kv file automatically
         :return: none
         '''
         # loading the content of root.kv
         self.root = Builder.load_file('kv_modes/root.kv')
+
+        # Push root onto stack
+        self.screen_stack.append('root')
 
         # hook_keyboard binds the escape key (back button in android)
         EventLoop.window.bind(on_keyboard=self.hook_keyboard)
@@ -110,6 +115,8 @@ class InventifyApp(App):
         Builder.unload_file('kv_modes/' + filename)
         # clear the container
         self.root.root_screen.clear_widgets()
+        # add screen to screen stack
+        self.screen_stack.append(selector)
         # load the .kv file
         selector = Builder.load_file('kv_modes/' + filename)
         # add content of the .kv file to the container
@@ -117,7 +124,12 @@ class InventifyApp(App):
 
     def hook_keyboard(self, window, key, *largs):
         if key == 27:
-            self.screen_select('root')
+            self.screen_stack.pop() # pop current screen
+
+            if not self.screen_stack:           # if list is empty, go to root
+                self.screen_select('')
+            else:                               # else, go to last screen
+                self.screen_select(self.screen_stack.pop())
             return True
 
 
