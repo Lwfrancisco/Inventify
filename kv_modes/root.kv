@@ -3,6 +3,8 @@
 RootWidget:
     # import container
     container: container
+    root_screen: root_screen
+    id: root_screen
 
     StackLayout:
         orientation: 'tb-lr'
@@ -11,7 +13,7 @@ RootWidget:
 
         ToggleButton:
             text: "Inventor"
-            size_hint: .15, .50
+            size_hint: 1.0, .3
 
             on_release: app.screen_select('inventor')
 
@@ -19,7 +21,7 @@ RootWidget:
 
         ToggleButton:
             text: "Developer"
-            size_hint: .15, .50
+            size_hint: 1.0, .3
 
             on_release: app.screen_select('developer')
 
@@ -27,10 +29,9 @@ RootWidget:
 
         # This becomes the entry widget for future kv screens
         BoxLayout:
-            size_hint: .85, .85
-            pos: .25, 20
+            size_hint: 1.0, .3
 
             id: container
 
             Label:
-                text: "Welcome to Inventify!\nPlease select a mode \nat the left to get started.\n(This is a placeholder page)"
+                text: "Welcome to Inventify!\nPlease select a mode \n to get started.\n(This is a placeholder page)"

@@ -1,0 +1,38 @@
+#:kivy 1.10.0
+
+
+# Define id so I can refer to the GridLayout
+# class functions
+# Display points to the entry widget
+# Rows automatically places the BoxLayout's evenly within the 5 rows.
+PostInventionGridLayout:
+    id: postInvention
+    display: entry
+    rows: 15
+    padding: 20
+    spacing: 20
+
+    font_size: 32
+
+    Label:
+        font_size: 36
+        text: "Search For Inventions"
+
+    BoxLayout:
+        spacing: 10
+
+        # Where input is displayed
+        TextInput:
+            id: entry
+            font_size: 32
+            multiline: False
+            size_hint: .85, 1.0
+            on_text_validate: searchInventions.search(entry.text) # when the user presses enter
+        Button:
+            text: "Search"
+            size_hint: .15, 1.0
+            on_press: searchInventions.search(entry.text)
+
+    StackLayout:
+        id: button_grid
+        spacing: 10

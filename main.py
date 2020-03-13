@@ -14,6 +14,7 @@ from kivy.properties import ObjectProperty
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
+from kivy.core.window import Window # For back button screen selecting
 
 import kivy
 import json
@@ -27,6 +28,9 @@ Config.set('graphics', 'height', '640')
 
 # Prevent kivy's automatic application exit on back button
 Config.set('kivy', 'exit_on_escape', '0')
+
+class PostInventionGridLayout(GridLayout):
+    '''Kivy layout for the invention posting page'''
 
 class SearchInventionsGridLayout(GridLayout):
     '''Kivy layout for the search inventions page'''
@@ -57,6 +61,9 @@ class DeveloperHomeGridLayout(GridLayout):
 class InventorHomeGridLayout(GridLayout):
     '''Contains class members accessible to the kv file'''
 
+class EmptyLayout(GridLayout):
+    '''Contains class members accessible to the kv file'''
+
 class DBAccess():
     '''Database Access for interacting with the Inventify database.'''
 
@@ -75,6 +82,7 @@ class RootWidget(BoxLayout):
     '''
 
     container = ObjectProperty(None)
+    root_screen = ObjectProperty(None)
 
 class InventifyApp(App):
     '''This is the main running process within the app.'''
