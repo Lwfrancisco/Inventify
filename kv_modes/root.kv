@@ -11,6 +11,12 @@ RootWidget:
         padding: 20
         spacing: 20
 
+        BoxLayout:
+            id: container # Makes this specific spot on the page a container for other widgets if need be.
+            size_hint: 1.0, .3
+            Image:
+                source: './images/inventify_logo.png'
+                size: self.texture_size
         ToggleButton:
             text: "Inventor"
             size_hint: 1.0, .3
@@ -26,12 +32,3 @@ RootWidget:
             on_release: app.screen_select('developer')
 
             group: 'mode'
-
-        # This becomes the entry widget for future kv screens
-        BoxLayout:
-            size_hint: 1.0, .3
-
-            id: container
-
-            Label:
-                text: "Welcome to Inventify!\nPlease select a mode \n to get started.\n(This is a placeholder page)"
