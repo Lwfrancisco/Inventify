@@ -35,8 +35,8 @@ Config.set('kivy', 'exit_on_escape', '0')
 class PostInventionGridLayout(GridLayout):
     '''Kivy layout for the invention posting page'''
 
-    def post_invention(self, name, nda, desc, user):
-        post = inv.invention(name, nda, desc, user)
+    # def post_invention(self, name, nda, desc, user):
+    #     post = inv.invention(name, nda, desc, user)
 
 class SearchInventionsGridLayout(GridLayout):
     '''Kivy layout for the search inventions page'''
