@@ -15,6 +15,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.core.window import Window # For back button screen selecting
+from kivy.base import EventLoop # For back button event capture
 
 import kivy
 import json
@@ -94,6 +95,9 @@ class InventifyApp(App):
         # loading the content of root.kv
         self.root = Builder.load_file('kv_modes/root.kv')
 
+        # hook_keyboard binds the escape key (back button in android)
+        EventLoop.window.bind(on_keyboard=self.hook_keyboard)
+
     def screen_select(self, selector):
         '''
         :param selector: character that is dependant on which mode button is toggled.
@@ -105,11 +109,16 @@ class InventifyApp(App):
         # reason: may have data from previous calls
         Builder.unload_file('kv_modes/' + filename)
         # clear the container
-        self.root.container.clear_widgets()
+        self.root.root_screen.clear_widgets()
         # load the .kv file
         selector = Builder.load_file('kv_modes/' + filename)
         # add content of the .kv file to the container
-        self.root.container.add_widget(selector)
+        self.root.root_screen.add_widget(selector)
+
+    def hook_keyboard(self, window, key, *largs):
+        if key == 27:
+            self.screen_select('root')
+            return True
 
 
 if __name__ == '__main__':
