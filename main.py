@@ -41,6 +41,12 @@ class PostInventionGridLayout(GridLayout):
 class SearchInventionsGridLayout(GridLayout):
     '''Kivy layout for the search inventions page'''
 
+    # button_grid = ObjectProperty(None)
+
+    # def __init__(self, **kwargs):
+    #     super(SearchInventionsGridLayout, self).__init__(**kwargs)
+    #     self.button_grid.bind(minimum_height=self.button_grid.setter('height'))
+
     # Function called when search is pressed
     def search(self, searchText):
         '''Allows the user to search for inventions.'''

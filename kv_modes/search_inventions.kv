@@ -8,6 +8,7 @@
 SearchInventionsGridLayout:
     id: searchInventions
     display: entry
+    button_grid: button_grid
     rows: 15
     padding: 20
     spacing: 20
@@ -33,6 +34,12 @@ SearchInventionsGridLayout:
             size_hint: .15, 1.0
             on_press: searchInventions.search(entry.text)
 
-    StackLayout:
-        id: button_grid
-        spacing: 10
+    ScrollView:
+        size: self.size
+        GridLayout:
+            id: button_grid
+            size_hint_y: None
+            cols: 1
+            row_default_height: '60'
+            row_force_default: True
+            spacing: 10

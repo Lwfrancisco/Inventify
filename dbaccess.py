@@ -6,7 +6,7 @@
 '''
 
 import json
-import os.path
+import os
 import invention as inv
 
 # Class simulates DB by accessing JSON
@@ -15,13 +15,21 @@ class DBAccess():
 
     # default constructor
     def __init__(self):
+        self.filepath = os.path.dirname(os.path.abspath(__file__))
         # Default data location
-        self.filename = './json/inventions.json'
+        self.filename = self.filepath + '/json/inventions.json'
 
         # Check if json file exists. If not, make one.
         if not os.path.isfile(self.filename):
-            inv_list = {"inventions":[]}
+            inv_list = {'inventions':[]}
             inv_list['id_count'] = 0
+
+            # Create Directory for file
+            directory = "json"
+            path = os.path.join(self.filepath, directory) 
+            os.mkdir(path)
+
+            # Create file/add basic info
             with open(self.filename, 'w') as json_file:
                 json.dump(inv_list, json_file, indent=4)
                 json_file.close()
