@@ -1,0 +1,40 @@
+{
+    "inventions": [
+        {
+            "id": 1,
+            "name": "Test 0",
+            "NDA": true,
+            "description": "Description of invention...",
+            "username": "test_user"
+        },
+        {
+            "id": 2,
+            "name": "Test 1",
+            "NDA": false,
+            "description": "Description of invention...",
+            "username": "test_user"
+        },
+        {
+            "id": 3,
+            "name": "Test 2",
+            "NDA": true,
+            "description": "Description of invention...",
+            "username": "test_user"
+        },
+        {
+            "id": 4,
+            "name": "Test 3",
+            "NDA": false,
+            "description": "Description of invention...",
+            "username": "test_user"
+        },
+        {
+            "id": 5,
+            "name": "Test 4",
+            "NDA": true,
+            "description": "Description of invention...",
+            "username": "test_user"
+        }
+    ],
+    "id_count": 5
+}
