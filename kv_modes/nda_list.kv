@@ -4,8 +4,8 @@
 # Define id so I can refer to the GridLayout
 # class functions
 # Rows automatically places the BoxLayout's evenly within the 6 rows.
-InventorHomeGridLayout:
-    id: inventorHome
+NDAListGridLayout:
+    id: ndaList
     rows: 6
     # padding: 50
     # spacing: 40
@@ -20,18 +20,11 @@ InventorHomeGridLayout:
             font_size: 72
             valign: 'middle'
             halign: 'center'
-            text: "Inventor Home"
+            text: "Available NDAs"
         Button:
-            text: "Post Inventions"
+            text: "Basic NDA"
             size_hint_y: 2.0
-            on_release: app.screen_select('post_invention')
+            on_release: app.screen_select('view_basic_nda')
         Button:
-            text: "NDA"
-            size_hint_y: 2.0
-            on_release: app.screen_select('nda_list')
-        Button:
-            text: "Start Patent Help"
-            size_hint_y: 2.0
-        Button:
-            text: "Create Inventor Profile"
+            text: "Custom NDA"
             size_hint_y: 2.0

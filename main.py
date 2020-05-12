@@ -105,6 +105,17 @@ class DeveloperHomeGridLayout(GridLayout):
 class InventorHomeGridLayout(GridLayout):
     '''Contains class members accessible to the kv file'''
 
+class NDAListGridLayout(GridLayout):
+    '''Contains class members accessible to the kv file'''
+
+class ViewBasicNDAGridLayout(GridLayout):
+    '''Contains class members accessible to the kv file'''
+
+    def open_pdf(self, filename):
+        '''Opens pdf in external app'''
+        from jnius import cast
+        from jnius import autoclass
+
 class EmptyLayout(GridLayout):
     '''Contains class members accessible to the kv file'''
 
