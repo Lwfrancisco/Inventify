@@ -60,7 +60,7 @@ class SearchInventionsGridLayout(GridLayout):
 
         for i in search_results:
             if i['id'] not in displayed_inventions:
-                button_text = "id: " + str(i['id']) + " Name: " + str(i['name'])
+                button_text = str(i['name']) + " #" + str(i['id'])
                 button = Button(text=button_text, id=str(i['id']))
                 self.ids.button_grid.add_widget(button)
                 button.bind(on_release=self.populate)
@@ -93,9 +93,8 @@ class ViewInventionGridLayout(GridLayout):
         self.description = invention['description']
         self.identifier = str(invention['id'])
 
-        self.ids['name'].text = self.name
+        self.ids['name'].text = self.name + self.identifier
         self.ids['description'].text = "Description: \n" + self.description
-        self.ids['identifier'].text = "ID: " + self.identifier
 
         # Deactivate Accept NDA Button
         self.ids['nda_button'].disabled = True
