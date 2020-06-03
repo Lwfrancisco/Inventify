@@ -24,4 +24,12 @@ ViewBasicNDAGridLayout:
         Button:
             text: "View Basic NDA"
             size_hint_y: 2.0
-            on_release: viewBasicNDA.open_pdf('Basic-Non-Disclosure-Agreement.pdf')
+            # on_release: viewBasicNDA.open_pdf('Basic-Non-Disclosure-Agreement.pdf')
+            on_release: viewBasicNDA.populate("nda/nda.txt")
+        Label:
+            id: nda_text
+            text: ""
+            valign: 'bottom'
+            size_hint_y: None
+            text_size: self.width, None
+            height: self.texture_size[1]

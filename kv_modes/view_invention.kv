@@ -16,11 +16,18 @@ ViewInventionGridLayout:
         font_size: 36
         id: name
         
-    Button:
-        id: nda_button
-        text: "Accept NDA"
-        size_hint: .15, .75
-        on_press: viewInvention.populate()
+    StackLayout:
+        orientation: 'lr-tb'
+        Button:
+            id: view_nda_button
+            text: "View NDA"
+            size_hint: .5, .45
+            on_release: app.screen_select('view_basic_nda')
+        Button:
+            id: nda_button
+            text: "Accept NDA"
+            size_hint: .5, .45
+            on_press: viewInvention.populate()
 
     StackLayout:
         spacing: 10
